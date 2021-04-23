@@ -7,37 +7,31 @@ let userName = prompt("Enter your name to join Global Chat");
 if (userName) {
     socket.emit('new-user-joined', userName);
 }
-
+function appendLI(text, className) {
+    let item = document.createElement('li');
+    item.textContent = text;
+    item.classList.add(className);
+    messages.appendChild(item);
+    messages.scrollTo(0, messages.scrollHeight);
+}
 form.addEventListener('submit', e => {
     e.preventDefault();
     if (input.value) {
-        let item = document.createElement('li');
-        item.textContent = input.value;
-        item.classList.add('right');
-        messages.appendChild(item);
+        appendLI(input.value,'right');
         socket.emit('chat message', input.value);
         input.value = "";
     }
 });
 
 socket.on('new-user-joined', userName => {
-    let item = document.createElement('li');
-    item.textContent = `${userName} joined the chat`;
-    item.classList.add('center');
-    messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
+    let text = `${userName} joined the chat`;
+    appendLI(text, 'center');
 })
 socket.on('chat message', data => {
-    let item = document.createElement('li');
-    item.textContent = `${data.name} : ${data.msg}`;
-    item.classList.add('left');
-    messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
+    let text = `${data.name} : ${data.msg}`;
+    appendLI(text, 'left');
 });
 socket.on('user-disconnected', userName => {
-    let item = document.createElement('li');
-    item.textContent = `${userName} left the chat`;
-    item.classList.add('center');
-    messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
+    let text = `${userName} left the chat`;
+    appendLI(text, 'center');
 })
