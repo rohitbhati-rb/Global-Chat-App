@@ -1,5 +1,5 @@
 {
-  "name": "lets-chat-app",
+  "name": "global-chat-app",
   "version": "1.0.0",
   "description": "Basic Chat Application built using Socket.io and Node.JS",
   "main": "index.js",
