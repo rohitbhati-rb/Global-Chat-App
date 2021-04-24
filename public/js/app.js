@@ -8,7 +8,7 @@ if (userName) {
     socket.emit('new-user-joined', userName);
 }
 function appendLI(text, className) {
-    let item = document.createElement('span');
+    let item = document.createElement('div');
     item.textContent = text;
     item.classList.add(className);
     messages.appendChild(item);
