@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
     socket.on('new-user-joined', newUserName => {
         users[socket.id] = newUserName;
         console.log(`${newUserName} joined the chat`);
-        io.emit('new-user-joined', newUserName);
+        socket.broadcast.emit('new-user-joined', newUserName);
     });
     // Sending and Recieving the message
     socket.on('chat message', msg => {

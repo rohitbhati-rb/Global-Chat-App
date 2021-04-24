@@ -35,7 +35,7 @@ body {
     font-size: 20px;
     align-items: flex-end;
     justify-content: center;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 	position: absolute;
 	right: 15%;
 }

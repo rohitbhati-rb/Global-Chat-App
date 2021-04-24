@@ -10,20 +10,14 @@ let months = ["January", "February", "March", "April", "May", "June", "July", "A
 function setDateAndTime() {
     let currDate = new Date();
     let currDay = currDate.getDay(), currMonth = currDate.getMonth(), date = currDate.getDate(), currYear = currDate.getFullYear();
-    
-    currentDate.innerText = "" + days[currDay] + ", " + months[currMonth] + " " + date + ", " + currYear;
+    currentDate.innerText = `${days[currDay]}, ${months[currMonth]} ${date}, ${currYear}`;
     currentTime.innerText = String(new Date().toLocaleTimeString()) + " IST";
 }
 setDateAndTime();
 setInterval(setDateAndTime, 1000);
 
-let userName = prompt("Enter your name to join Global Chat");
-if (userName) {
-    socket.emit('new-user-joined', userName);
-}
-
 // Functions
-function appendLI(text, className) {
+function appendNotification(text, className) {
     let item = document.createElement('div');
     item.textContent = text;
     item.classList.add(className);
@@ -57,6 +51,11 @@ function appendMessage(sender, text, className) {
 }
 
 // Events
+let userName = prompt("Enter your name to join Global Chat");
+if (userName) {
+    appendNotification('You joined', 'center');
+    socket.emit('new-user-joined', userName);
+}
 form.addEventListener('submit', e => {
     e.preventDefault();
     if (input.value) {
@@ -69,12 +68,12 @@ form.addEventListener('submit', e => {
 // Socket Events
 socket.on('new-user-joined', userName => {
     let text = `${userName} joined`;
-    appendLI(text, 'center');
+    appendNotification(text, 'center');
 })
 socket.on('chat message', data => {
     appendMessage(data.name, data.msg, 'left');
 });
 socket.on('user-disconnected', userName => {
     let text = `${userName} left`;
-    appendLI(text, 'center');
+    appendNotification(text, 'center');
 })
