@@ -10,16 +10,34 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
-nav {
-	background: transparent;
-}
 .logo {
-	display: block;
+	display: flex;
 	margin: auto;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.logo > span{
+	font-size: 30px;
+    font-weight: 600;
+    color: white;
+}
+.img-logo{
 	height: 50px;
 	width: 50px;
 	border-radius: 25px;
 	padding: 10px;
+}
+.dateTime{
+	display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 20px;
+    align-items: flex-end;
+    justify-content: center;
+    letter-spacing: 0.5px;
+	position: absolute;
+	right: 15%;
 }
 .container {
 	max-width: 70%;
@@ -50,9 +68,7 @@ nav {
     margin-bottom: 5px;
     margin-left: 5px;
     background: rgba(0, 0, 0, 0.5);
-    font-size: 15px;
     border-radius: 0px 10px;
-    color: white;
     font-weight: 600;
 	max-width: 40%;
 }
@@ -62,9 +78,7 @@ nav {
 	margin-bottom: 5px;
     margin-right: 5px;
 	background: rgba(0, 0, 0, 0.5);
-	font-size: 15px;
 	border-radius: 10px 0px;
-	color: white;
     font-weight: 600;
 	max-width: 40%;
 }
@@ -79,7 +93,9 @@ nav {
     font-weight: 500;
     letter-spacing: 0.3px;
 }
-
+.welcome{
+	font-size: 16px;
+}
 .sender{
 	margin: 0;
 	font-size: 12px;
@@ -103,11 +119,13 @@ nav {
 	margin: 5px 20px 5px 0px;
 	font-size: 14px;
 	text-align: left;
+	color: white;
 }
 .msgRight{
 	margin: 5px 20px 5px 0px;
 	font-size: 14px;
 	text-align: left;
+	color: white;
 }
 .time{
 	margin: 0;

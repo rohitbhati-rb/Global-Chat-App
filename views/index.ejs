@@ -12,10 +12,21 @@
 
 <body>
     <nav>
-        <img class="logo" src="img/chat_logo.png" alt="lets-chat-logo">
+        <div class="logo">
+            <img class="img-logo" src="img/chat_logo.png" alt="lets-chat-logo">
+            <span>Global Chat</span>
+            <div class="dateTime">
+                <span class="currentDate"></span>
+                <span class="currentTime"></span>
+            </div>
+        </div>
     </nav>
     <div class="container">
-        <div id="messages"></div>
+        <div id="messages">
+            <div class="center welcome">
+                Welcome to Global Chat
+            </div>
+        </div>
         <form id="form" action="">
             <input id="input" autocomplete="off" />
             <button>Send</button>

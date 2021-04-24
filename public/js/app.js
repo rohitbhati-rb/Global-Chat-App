@@ -1,7 +1,21 @@
 let socket = io();
-let messages = document.getElementById('messages');
-let form = document.getElementById('form');
-let input = document.getElementById('input');
+const messages = document.getElementById('messages');
+const form = document.getElementById('form');
+const input = document.getElementById('input');
+let currentDate = document.querySelector('.currentDate');
+let currentTime = document.querySelector('.currentTime');
+
+let days = ["Sun", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur"];
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+function setDateAndTime() {
+    let currDate = new Date();
+    let currDay = currDate.getDay(), currMonth = currDate.getMonth(), date = currDate.getDate(), currYear = currDate.getFullYear();
+    
+    currentDate.innerText = "" + days[currDay] + ", " + months[currMonth] + " " + date + ", " + currYear;
+    currentTime.innerText = String(new Date().toLocaleTimeString()) + " IST";
+}
+setDateAndTime();
+setInterval(setDateAndTime, 1000);
 
 let userName = prompt("Enter your name to join Global Chat");
 if (userName) {
