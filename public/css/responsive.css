@@ -87,3 +87,9 @@
         padding-left: 0%;
     }
 }
+@media screen and (max-width: 330px) {
+    .logo > span {
+        font-size: 1.3em;
+        font-weight: 500;
+    }
+}

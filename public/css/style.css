@@ -182,15 +182,16 @@ body {
 }
 
 .send-btn {
-	background: rgba(0, 0, 0, 0.5);
-	border: 2px solid white;
+	background: transparent;
+	border: none;
 	padding: 0 1rem;
-	border-radius: 2rem;
 	margin: 0.25rem;
 	color: white;
 	outline: none;
-	font-size: 20px;
 	cursor: pointer;
+}
+i{
+	font-size: xx-large;
 }
 
 /* Styling Scrollbar */
