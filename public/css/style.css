@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 body {
 	width: 100%;
     height: 100vh;
@@ -10,6 +9,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
+/* Navbar Components */
 .logo {
 	display: flex;
 	margin: auto;
@@ -18,7 +18,7 @@ body {
 	position: relative;
 }
 .logo > span{
-	font-size: 30px;
+	font-size: 2em;
     font-weight: 600;
     color: white;
 }
@@ -32,13 +32,14 @@ body {
 	display: flex;
     flex-direction: column;
     color: white;
-    font-size: 20px;
+    font-size: 1.1em;
     align-items: flex-end;
     justify-content: center;
     letter-spacing: 1px;
 	position: absolute;
 	right: 15%;
 }
+/* Container for both messages and form */
 .container {
 	max-width: 70%;
     margin: 0% auto;
@@ -51,17 +52,19 @@ body {
     z-index: 2;
     background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
 }
-#messages {
+/* Main div for all Messages */
+.messages {
 	overflow-y: auto;
 	height: 92%;
 	display: flex;
 	flex-direction: column;
 }
 
-#messages > div {
+.messages > div {
 	display: block;
 	padding: 3px 10px;
 }
+/* Incoming Message */
 .left{
 	text-align: left;
     margin-right: auto;
@@ -70,8 +73,9 @@ body {
     background: rgba(0, 0, 0, 0.5);
     border-radius: 0px 10px;
     font-weight: 600;
-	max-width: 40%;
+	max-width: 60%;
 }
+/* Outgoing Message */
 .right{
 	text-align: right;
 	margin-left: auto;
@@ -80,8 +84,9 @@ body {
 	background: rgba(0, 0, 0, 0.5);
 	border-radius: 10px 0px;
     font-weight: 600;
-	max-width: 40%;
+	max-width: 60%;
 }
+/* User Notifications */
 .center{
 	text-align: center;
     margin: 3px auto;
@@ -89,16 +94,18 @@ body {
     background: black;
     color: white;
     border-radius: 25px;
-    font-size: 14px;
+    font-size: 0.85em;
     font-weight: 500;
     letter-spacing: 0.3px;
 }
+/* First Notification for a new User. */
 .welcome{
-	font-size: 16px;
+	font-size: 1em;
 }
+/* Message Components */
 .sender{
 	margin: 0;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	text-align: left;
 }
@@ -120,12 +127,16 @@ body {
 	font-size: 14px;
 	text-align: left;
 	color: white;
+	white-space: normal;
+    word-break: break-word;
 }
 .msgRight{
 	margin: 5px 20px 5px 0px;
 	font-size: 14px;
 	text-align: left;
 	color: white;
+	white-space: normal;
+    word-break: break-word;
 }
 .time{
 	margin: 0;
@@ -134,41 +145,50 @@ body {
 	color: rgb(212, 212, 212);
 }
 
-#form {
+/* Styling Form */
+.form {
 	display: flex;
 	width: 100%;
 	height: 8%;
 	backdrop-filter: blur(10px);
 	border-radius: 5px;
 }
-
-#input {
+.online-users{
+	background: rgba(0, 0, 0, 0.5);
+    border: 2px solid white;
+    padding: 0.6rem 1rem 0.4rem 1rem;
+    border-radius: 25%;
+    margin: 0.25rem;
+    color: white;
+    font-size: 16px;
+}
+.input {
 	background: rgba(0, 0, 0, 0.5);
 	border: 2px solid white;
 	padding: 0 1rem;
-	flex-grow: 1.5;
 	border-radius: 2rem;
 	margin: 0.25rem;
+	color: white;
 	font-size: 16px;
-	color: white;
+	flex-grow: 1.0;
 }
 
-#input:focus {
+.input:focus {
 	outline: none;
 }
 
-#form > button {
+.send-btn {
 	background: rgba(0, 0, 0, 0.5);
 	border: 2px solid white;
 	padding: 0 1rem;
-	margin: 0.25rem;
 	border-radius: 2rem;
-	flex-grow: 0.2;
-	outline: none;
+	margin: 0.25rem;
 	color: white;
+	outline: none;
 	font-size: 20px;
-	font-weight: bold;
 }
+
+/* Styling Scrollbar */
 ::-webkit-scrollbar {
 	width: 8px;
 }

@@ -13,22 +13,26 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 const users = {};
+let totalUsers;
 
 io.on('connection', (socket) => {
     // When a user connects
-    socket.on('new-user-joined', newUserName => {
-        users[socket.id] = newUserName;
-        console.log(`${newUserName} joined the chat`);
-        socket.broadcast.emit('new-user-joined', newUserName);
+    socket.on('new-user-joined', username => {
+        users[socket.id] = username;
+        totalUsers = Object.keys(users).length;
+        socket.broadcast.emit('new-user-joined', username);
+        io.emit('updateUserCount',totalUsers);
     });
     // Sending and Recieving the message
-    socket.on('chat message', msg => {
-        socket.broadcast.emit('chat message', {msg:msg, name:users[socket.id]});
+    socket.on('chat message', message => {
+        socket.broadcast.emit('chat message', {message:message, username:users[socket.id]});
     });
     // When a user disconnects
     socket.on('disconnect', () => {
-        console.log('User Disconnected');
         socket.broadcast.emit('user-disconnected',users[socket.id]);
+        delete users[socket.id];
+        totalUsers = Object.keys(users).length;
+        io.emit('updateUserCount',totalUsers);
     });
 });
 

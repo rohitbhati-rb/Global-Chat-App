@@ -1,17 +1,20 @@
 let socket = io();
-const messages = document.getElementById('messages');
-const form = document.getElementById('form');
-const input = document.getElementById('input');
+const messages = document.querySelector('.messages');
+const form = document.querySelector('.form');
+const input = document.querySelector('.input');
+let onlineUsers = document.querySelector('.online-users');
 let currentDate = document.querySelector('.currentDate');
 let currentTime = document.querySelector('.currentTime');
 
-let days = ["Sun", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur"];
+let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 function setDateAndTime() {
     let currDate = new Date();
     let currDay = currDate.getDay(), currMonth = currDate.getMonth(), date = currDate.getDate(), currYear = currDate.getFullYear();
     currentDate.innerText = `${days[currDay]}, ${months[currMonth]} ${date}, ${currYear}`;
-    currentTime.innerText = String(new Date().toLocaleTimeString()) + " IST";
+    let currTime = String(new Date().toLocaleTimeString()) + " IST";
+    if(currTime[1] === ':')currTime = '0' + currTime;
+    currentTime.innerText = currTime;
 }
 setDateAndTime();
 setInterval(setDateAndTime, 1000);
@@ -49,12 +52,14 @@ function appendMessage(sender, text, className) {
     item.appendChild(time);
     messages.scrollTo(0, messages.scrollHeight);
 }
+const updateUserCount = (totalUsers) => onlineUsers.innerText = totalUsers;
 
 // Events
 let userName = prompt("Enter your name to join Global Chat");
 if (userName) {
     appendNotification('You joined', 'center');
     socket.emit('new-user-joined', userName);
+    onlineUsers.innerText = `${parseInt(onlineUsers.innerText) + 1}`;
 }
 form.addEventListener('submit', e => {
     e.preventDefault();
@@ -66,14 +71,18 @@ form.addEventListener('submit', e => {
 });
 
 // Socket Events
-socket.on('new-user-joined', userName => {
-    let text = `${userName} joined`;
+socket.on('new-user-joined', username => {
+    let text = `${username} joined`;
     appendNotification(text, 'center');
 })
 socket.on('chat message', data => {
-    appendMessage(data.name, data.msg, 'left');
+    appendMessage(data.username, data.message, 'left');
 });
-socket.on('user-disconnected', userName => {
-    let text = `${userName} left`;
+socket.on('user-disconnected', username => {
+    let text = `${username} left`;
     appendNotification(text, 'center');
+    updateUserCount(data.count);
+})
+socket.on('updateUserCount', totalUsers => {
+    updateUserCount(totalUsers);
 })
