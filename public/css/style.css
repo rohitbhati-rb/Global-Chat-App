@@ -10,14 +10,18 @@ body {
     background-repeat: no-repeat;
 }
 /* Navbar Components */
-.logo {
+.navbar {
 	display: flex;
-	margin: auto;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 }
-.logo > span{
+.logo{
+	text-decoration: none;
+	color: white;
+	display: contents;
+}
+.global-chat{
 	font-size: 2em;
     font-weight: 600;
     color: white;
@@ -186,6 +190,7 @@ body {
 	color: white;
 	outline: none;
 	font-size: 20px;
+	cursor: pointer;
 }
 
 /* Styling Scrollbar */

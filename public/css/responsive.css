@@ -1,0 +1,89 @@
+@media screen and (max-width: 870px) {
+	.img-logo {
+		height: 40px;
+		width: 40px;
+	}
+	.logo > span {
+		font-size: 1.5em;
+	}
+	.dateTime {
+		font-size: 0.9em;
+	}
+	.welcome {
+		font-size: 0.85em;
+	}
+	.center {
+		font-size: 0.8em;
+	}
+	.right {
+		font-weight: 500;
+	}
+	.msgRight {
+		font-size: 12px;
+	}
+	.msgLeft {
+		font-size: 12px;
+	}
+	.time {
+		font-weight: 9px;
+	}
+	.sender {
+		font-size: 12px;
+	}
+	.online-users {
+		font-size: 14px;
+	}
+	.input {
+		font-size: 15px;
+	}
+	.send-btn {
+		font-size: 16px;
+	}
+}
+@media screen and (max-width: 770px) {
+    body{
+        background-image: url(../img/chat_bg2.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .navbar{
+        justify-content: left;
+        padding-left: 15%;
+    }
+}
+@media screen and (max-width: 525px) {
+    .logo > span {
+        font-size: 1.2em;
+    }
+    .img-logo {
+        height: 35px;
+        width: 35px;
+    }
+    .online-users {
+        font-size: 12px;
+    }
+    .input {
+        font-size: 13px;
+    }
+    .send-btn {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 470px) {
+    .logo > span {
+        font-size: 1.5em;
+        font-weight: 500;
+    }
+    .dateTime {
+        font-size: 0.9em;
+        right: 2%;
+    }
+    .container {
+        min-width: 100%;
+        margin: 0;
+    }
+    .navbar{
+        justify-content: left;
+        padding-left: 0%;
+    }
+}
