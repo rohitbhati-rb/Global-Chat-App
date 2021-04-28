@@ -50,7 +50,6 @@ function getMessageTime(){
         ampm = " PM";
         hour -= 12;
     }
-    if (hour <= 9) hour = "0" + hour;
     if (minutes <= 9) minutes = "0" + minutes;
     return `${hour}:${minutes} ${ampm}`;
 }
