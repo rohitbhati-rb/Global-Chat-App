@@ -8,37 +8,52 @@ let currentTime = document.querySelector('.current-time');
 
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-function setDateAndTime() {
-    const dateObject = new Date();
-    let [month, date, year] = dateObject.toLocaleDateString("IST").split("/");
-    let day = dateObject.getDay();
-    currentDate.innerText = `${days[day]}, ${months[month-1]} ${date}, ${year}`;
-
-    let [hour, minute, second, ampm] = dateObject.toLocaleTimeString("IST").split(/:| /);
-    if(hour.length === 1) hour = '0' + hour;
-    currentTime.innerText = `${hour}:${minute}:${second} ${ampm}`;
+function setDate() {
+    let d = new Date();
+    let day = d.getDay(), month = d.getMonth(), date = d.getDate(), year = d.getFullYear();
+    currentDate.innerText = `${days[day]}, ${months[month]} ${date}, ${year}`;
 }
-/*
-var d=new Date();
-var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getFullYear();
-var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
-
-if(nhour==0){ap=" AM";nhour=12;}
-else if(nhour<12){ap=" AM";}
-else if(nhour==12){ap=" PM";}
-else if(nhour>12){ap=" PM";nhour-=12;}
-
-if(nmin<=9) nmin="0"+nmin;
-if(nsec<=9) nsec="0"+nsec;
-
-var clocktext=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
-document.getElementById('clockbox').innerHTML=clocktext;
-*/
-
-setDateAndTime();
-setInterval(setDateAndTime, 1000);
+function setTime() {
+    let d = new Date();
+    let hour = d.getHours(), minutes = d.getMinutes(), seconds = d.getSeconds(), ampm;
+    if (hour < 12) {
+        ampm = " AM";
+        if (hour === 0) {
+            hour = 12;
+            setDate();
+        }
+    }
+    else if (hour === 12) ampm = " PM";
+    else {
+        ampm = " PM";
+        hour -= 12;
+    }
+    if (hour <= 9) hour = "0" + hour;
+    if (minutes <= 9) minutes = "0" + minutes;
+    if (seconds <= 9) seconds = "0" + seconds;
+    currentTime.innerText = `${hour}:${minutes}:${seconds} ${ampm}`;
+}
+setDate();
+setTime();
+setInterval(setTime, 1000);
 
 // Functions
+function getMessageTime(){
+    let d = new Date();
+    let hour = d.getHours(), minutes = d.getMinutes(), ampm;
+    if (hour < 12) {
+        ampm = " AM";
+        if (hour === 0) hour = 12;
+    }
+    else if (hour === 12) ampm = " PM";
+    else {
+        ampm = " PM";
+        hour -= 12;
+    }
+    if (hour <= 9) hour = "0" + hour;
+    if (minutes <= 9) minutes = "0" + minutes;
+    return `${hour}:${minutes} ${ampm}`;
+}
 function appendNotification(text, className) {
     let item = document.createElement('div');
     item.textContent = text;
@@ -61,9 +76,7 @@ function appendMessage(sender, text, className) {
     else msg.classList.add('msg-right');
 
     let time = document.createElement('p');
-    let temp = String(new Date().toLocaleTimeString());
-    temp = temp.slice(0, temp.lastIndexOf(':')) + temp.slice(temp.lastIndexOf(' '));
-    time.textContent = temp;
+    time.textContent = getMessageTime();
     time.classList.add('time');
 
     if (sender.length != 0) item.appendChild(user);
