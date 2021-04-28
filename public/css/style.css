@@ -32,7 +32,7 @@ body {
 	border-radius: 25px;
 	padding: 10px;
 }
-.dateTime{
+.date-time{
 	display: flex;
     flex-direction: column;
     color: white;
@@ -126,7 +126,7 @@ body {
 	color: lightgreen;
 }
 
-.msgLeft{
+.msg-left{
 	margin: 5px 20px 5px 0px;
 	font-size: 14px;
 	text-align: left;
@@ -134,7 +134,7 @@ body {
 	white-space: normal;
     word-break: break-word;
 }
-.msgRight{
+.msg-right{
 	margin: 5px 20px 5px 0px;
 	font-size: 14px;
 	text-align: left;

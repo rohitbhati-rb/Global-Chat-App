@@ -3,19 +3,38 @@ const messages = document.querySelector('.messages');
 const form = document.querySelector('.form');
 const input = document.querySelector('.input');
 let onlineUsers = document.querySelector('.online-users');
-let currentDate = document.querySelector('.currentDate');
-let currentTime = document.querySelector('.currentTime');
+let currentDate = document.querySelector('.current-date');
+let currentTime = document.querySelector('.current-time');
 
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 function setDateAndTime() {
-    let currDate = new Date();
-    let currDay = currDate.getDay(), currMonth = currDate.getMonth(), date = currDate.getDate(), currYear = currDate.getFullYear();
-    currentDate.innerText = `${days[currDay]}, ${months[currMonth]} ${date}, ${currYear}`;
-    let currTime = String(new Date().toLocaleTimeString()) + " IST";
-    if(currTime[1] === ':')currTime = '0' + currTime;
-    currentTime.innerText = currTime;
+    const dateObject = new Date();
+    let [month, date, year] = dateObject.toLocaleDateString("IST").split("/");
+    let day = dateObject.getDay();
+    currentDate.innerText = `${days[day]}, ${months[month-1]} ${date}, ${year}`;
+
+    let [hour, minute, second, ampm] = dateObject.toLocaleTimeString("IST").split(/:| /);
+    if(hour.length === 1) hour = '0' + hour;
+    currentTime.innerText = `${hour}:${minute}:${second} ${ampm}`;
 }
+/*
+var d=new Date();
+var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getFullYear();
+var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+
+if(nhour==0){ap=" AM";nhour=12;}
+else if(nhour<12){ap=" AM";}
+else if(nhour==12){ap=" PM";}
+else if(nhour>12){ap=" PM";nhour-=12;}
+
+if(nmin<=9) nmin="0"+nmin;
+if(nsec<=9) nsec="0"+nsec;
+
+var clocktext=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+document.getElementById('clockbox').innerHTML=clocktext;
+*/
+
 setDateAndTime();
 setInterval(setDateAndTime, 1000);
 
@@ -38,8 +57,8 @@ function appendMessage(sender, text, className) {
 
     let msg = document.createElement('p');
     msg.textContent = text;
-    if (sender.length != 0) msg.classList.add('msgLeft');
-    else msg.classList.add('msgRight');
+    if (sender.length != 0) msg.classList.add('msg-left');
+    else msg.classList.add('msg-right');
 
     let time = document.createElement('p');
     let temp = String(new Date().toLocaleTimeString());
@@ -63,7 +82,7 @@ if (userName) {
 }
 form.addEventListener('submit', e => {
     e.preventDefault();
-    if (input.value) {
+    if (/\S/.test(input.value)) {
         appendMessage('', input.value, 'right');
         socket.emit('chat message', input.value);
         input.value = "";
@@ -81,7 +100,6 @@ socket.on('chat message', data => {
 socket.on('user-disconnected', username => {
     let text = `${username} left`;
     appendNotification(text, 'center');
-    updateUserCount(data.count);
 })
 socket.on('updateUserCount', totalUsers => {
     updateUserCount(totalUsers);

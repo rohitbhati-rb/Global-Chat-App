@@ -6,7 +6,7 @@
 	.logo > span {
 		font-size: 1.5em;
 	}
-	.dateTime {
+	.date-time {
 		font-size: 0.9em;
 	}
 	.welcome {
@@ -18,10 +18,10 @@
 	.right {
 		font-weight: 500;
 	}
-	.msgRight {
+	.msg-right {
 		font-size: 12px;
 	}
-	.msgLeft {
+	.msg-left {
 		font-size: 12px;
 	}
 	.time {
@@ -74,7 +74,7 @@
         font-size: 1.5em;
         font-weight: 500;
     }
-    .dateTime {
+    .date-time {
         font-size: 0.9em;
         right: 2%;
     }
